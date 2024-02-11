@@ -142,55 +142,6 @@ In this example, `complexFn()` is a CPU-intensive task that is executed asynchro
 ```
 ```
 
-
-```
-# Single-Threaded Behavior in JavaScript
-
-JavaScript is single-threaded, meaning it executes one task at a time in a single call stack. This means that even if a machine has multiple cores, JavaScript can only utilize one core at a time for processing tasks.
-
-## Single-Threaded Execution Example
-
-```javascript
-let sum = 0;
-for (var i = 0; i < n; i++) {
-    sum += 1;
-}
-return sum;
-```
-
-In this example, the loop runs sequentially, one iteration at a time, and utilizes only one core of the machine.
-
-## Asynchronous Operations in JavaScript
-
-JavaScript handles asynchronous operations using event loop and callback functions. Asynchronous operations allow non-blocking execution, enabling JavaScript to perform tasks such as I/O operations and network requests without halting the execution of other tasks.
-
-### Example of Asynchronous Operation
-
-```javascript
-readFromAFile();
-```
-
-In this example, `readFromAFile()` initiates a file reading operation, and JavaScript continues executing other tasks without waiting for the file reading to complete. Once the file reading operation is finished, a callback function is triggered to handle the result.
-
-## Multi-Core Utilization in Asynchronous JavaScript
-
-Asynchronous JavaScript operations can still run on a single core but may utilize multiple cores indirectly through the operating system's scheduling of tasks. Node.js, for example, can leverage worker threads to execute CPU-intensive tasks in parallel.
-
-### Example of Asynchronous Operation with Multi-Core Utilization
-
-```javascript
-const startTime = new Date().getTime();
-complexFn(10000000 / 10);
-const endTime = new Date().getTime();
-console.log((endTime - startTime) / 10000);
-```
-
-In this example, `complexFn()` is a CPU-intensive task that is executed asynchronously. While JavaScript is single-threaded, Node.js can distribute the workload across multiple threads or processes, potentially utilizing multiple cores for parallel execution.
-```
-```
-
-
-
 # Comparison of Strongly Typed (Java) and Loosely Typed (JavaScript) Nature
 
 Java and JavaScript have different type systems, with Java being strongly typed and JavaScript being loosely typed. Let's compare how they handle variable assignments:
@@ -209,7 +160,8 @@ String str = "Hello"; // str is declared as a string
 // str = 20; // Cannot assign an integer value to a string variable
 
 
-```markdown
+```
+
 # Comparison: Native JavaScript vs API JavaScript
 
 ## Native JavaScript
@@ -243,6 +195,42 @@ fetch('https://api.example.com/data')
 ### Node.js APIs
 
 Node.js provides APIs for server-side programming, file system operations, networking, and access to operating system functionalities. These APIs are designed to work in the Node.js runtime environment and are not available in web browsers.
+
+### Node.js APIs Examples
+Below are some commonly used Node.js APIs along with code examples.
+
+## HTTP Server Example
+
+```javascript
+const http = require('http');
+
+const server = http.createServer((req, res) => {
+  res.writeHead(200, { 'Content-Type': 'text/plain' });
+  res.end('Hello World!\n');
+});
+
+server.listen(3000, () => {
+  console.log('Server running at http://localhost:3000/');
+});
+```
+
+## File System Operations Example
+```javascript
+const fs = require('fs');
+
+// Read a file
+fs.readFile('example.txt', 'utf8', (err, data) => {
+  if (err) throw err;
+  console.log(data);
+});
+
+// Write to a file
+fs.writeFile('example.txt', 'Hello Node.js!', (err) => {
+  if (err) throw err;
+  console.log('File written successfully!');
+});
+```
+
 
 ### Browser APIs
 
